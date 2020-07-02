@@ -40,8 +40,6 @@ jobs:
         run: sbt compile
       - name: Unit tests
         run: sbt test
-      - name: Integration tests
-        run: sbt integration
 
   release:
     needs: build
