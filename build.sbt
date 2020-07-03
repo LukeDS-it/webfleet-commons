@@ -67,3 +67,6 @@ lazy val root = (project in file("."))
     ),
     libraryDependencies ++= akkaDependencies ++ dependencies
   )
+
+addCommandAlias("report", ";coverage;test;coverageReport")
+addCommandAlias("coverageoff", ";set coverageEnabled := false;")
