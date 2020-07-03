@@ -11,6 +11,9 @@ val testcontainersVersion = "1.14.2"
 val testcontainersScalaVersion = "0.37.0"
 val circeVersion = "0.13.0"
 val janinoVersion = "3.1.0"
+val amqpClientVersion = "5.9.0"
+val jwksVersion = "0.8.2"
+val jwtVersion = "3.8.1"
 
 val akkaDependencies = Seq(
   "com.typesafe.akka" %% "akka-http" % akkaHttpVersion,
@@ -27,25 +30,26 @@ val akkaDependencies = Seq(
   "com.typesafe.akka" %% "akka-persistence-testkit" % akkaVersion % Test,
 )
 
-val baseDependencies = Seq(
-  "de.heikoseeberger" %% "akka-http-circe" % akkaHttpCirceVersion,
+val dependencies = Seq(
+  "com.auth0" % "jwks-rsa" % jwksVersion,
+  "com.auth0" % "java-jwt" % jwtVersion,
+  "com.rabbitmq" % "amqp-client" % amqpClientVersion,
+
   "io.circe" %% "circe-core" % circeVersion,
-  "io.circe" %% "circe-generic" % circeVersion,
   "io.circe" %% "circe-parser" % circeVersion,
+  "io.circe" %% "circe-generic" % circeVersion,
+  "de.heikoseeberger" %% "akka-http-circe" % akkaHttpCirceVersion,
+
+  "org.codehaus.janino" % "janino" % janinoVersion,
+  "ch.qos.logback" % "logback-classic" % logbackVersion,
   "com.github.pureconfig" %% "pureconfig" % pureconfigVersion,
   "com.typesafe.scala-logging" %% "scala-logging" % scalaLoggingVersion,
-  "ch.qos.logback" % "logback-classic" % logbackVersion,
-  "org.codehaus.janino" % "janino" % janinoVersion,
   "net.logstash.logback" % "logstash-logback-encoder" % logstashLogbackEncoderVersion,
-  "org.scalatest" %% "scalatest" % scalatestVersion % Test,
-  "org.scalatestplus" %% "scalatestplus-mockito" % scalatestMockitoVersion % Test,
-)
 
-val customDependencies = Seq(
-  "com.auth0" % "jwks-rsa" % "0.8.2",
-  "com.auth0" % "java-jwt" % "3.8.1",
-  "org.liquibase" % "liquibase-core" % "3.9.0",
-  "com.rabbitmq" % "amqp-client" % "5.9.0",
+  "org.scalatest" %% "scalatest" % scalatestVersion % Test,
+  "org.testcontainers" % "testcontainers" % testcontainersVersion % Test,
+  "com.dimafeng" %% "testcontainers-scala" % testcontainersScalaVersion % Test,
+  "org.scalatestplus" %% "scalatestplus-mockito" % scalatestMockitoVersion % Test,
 )
 
 lazy val root = (project in file("."))
@@ -61,5 +65,5 @@ lazy val root = (project in file("."))
     envVars in IntegrationTest := Map(
       "APP_VERSION" -> git.gitDescribedVersion.value.getOrElse((version in ThisBuild).value)
     ),
-    libraryDependencies ++= akkaDependencies ++ baseDependencies ++ customDependencies
+    libraryDependencies ++= akkaDependencies ++ dependencies
   )
