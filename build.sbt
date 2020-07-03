@@ -1,5 +1,4 @@
 val akkaVersion = "2.6.5"
-val akkaJdbcVersion = "3.5.3"
 val akkaHttpVersion = "10.1.12"
 val akkaHttpCirceVersion = "1.31.0"
 val pureconfigVersion = "0.12.3"
@@ -12,8 +11,6 @@ val testcontainersVersion = "1.14.2"
 val testcontainersScalaVersion = "0.37.0"
 val circeVersion = "0.13.0"
 val janinoVersion = "3.1.0"
-val postgresqlVersion = "42.2.12"
-val slickVersion = "3.3.2"
 
 val akkaDependencies = Seq(
   "com.typesafe.akka" %% "akka-http" % akkaHttpVersion,
@@ -23,7 +20,6 @@ val akkaDependencies = Seq(
   "com.typesafe.akka" %% "akka-cluster-sharding-typed" % akkaVersion,
   "com.typesafe.akka" %% "akka-persistence-query" % akkaVersion,
   "com.typesafe.akka" %% "akka-serialization-jackson" % akkaVersion,
-  "com.github.dnvriend" %% "akka-persistence-jdbc" % akkaJdbcVersion,
   "com.typesafe.akka" %% "akka-testkit" % akkaVersion % Test,
   "com.typesafe.akka" %% "akka-actor-testkit-typed" % akkaVersion % Test,
   "com.typesafe.akka" %% "akka-http-testkit" % akkaHttpVersion % Test,
@@ -46,9 +42,6 @@ val baseDependencies = Seq(
 )
 
 val customDependencies = Seq(
-  "org.postgresql" % "postgresql" % postgresqlVersion,
-  "com.typesafe.slick" %% "slick" % slickVersion,
-  "com.github.tminglei" %% "slick-pg" % "0.19.0",
   "com.auth0" % "jwks-rsa" % "0.8.2",
   "com.auth0" % "java-jwt" % "3.8.1",
   "org.liquibase" % "liquibase-core" % "3.9.0",
