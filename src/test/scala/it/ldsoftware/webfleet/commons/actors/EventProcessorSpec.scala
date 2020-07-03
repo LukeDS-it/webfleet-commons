@@ -30,7 +30,7 @@ class EventProcessorSpec
   val tag = "tag"
 
   "The event processor" should {
-    "process events saved from Content" in {
+    "process events" in {
       val readJournal = mock[EventsByTagQuery]
       val db = mock[OffsetManager]
       val envelope = makeEnvelope
